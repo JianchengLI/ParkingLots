@@ -1,5 +1,6 @@
 import exception.EmptyCarNumberException;
 import exception.ParkingLotsFullException;
+import exception.TicketNullException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -40,6 +41,14 @@ public class ParkingLotTest {
         Car car2 = new Car("");
         assertThrows(ParkingLotsFullException.class, ()->{
             parkingLot.park(car2);
+        });
+    }
+
+    @Test
+    public void should_return_ticket_null_exception_when_pick_given_no_ticket(){
+        ParkingLot parkingLot = new ParkingLot(100);
+        assertThrows(TicketNullException.class,()->{
+            parkingLot.pick(null);
         });
     }
 }

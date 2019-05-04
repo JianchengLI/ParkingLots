@@ -1,5 +1,6 @@
 import exception.EmptyCarNumberException;
 import exception.ParkingLotsFullException;
+import exception.TicketNullException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,5 +28,9 @@ public class ParkingLot {
 
     public boolean isAvailable() {
         return lots.size() < capacity;
+    }
+
+    public void pick(Ticket ticket) {
+        if(ticket == null) { throw new TicketNullException(); }
     }
 }
