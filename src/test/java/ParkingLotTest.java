@@ -61,4 +61,14 @@ public class ParkingLotTest {
             parkingLot.pick(ticketInvalid);
         });
     }
+
+    @Test
+    public void should_get_car_when_pick_given_valid_ticket(){
+        ParkingLot parkingLot = new ParkingLot(100);
+        Car entryCar = new Car("CN123456");
+        Ticket validTicket = parkingLot.park(entryCar);
+        Car leaveCar = parkingLot.pick(validTicket);
+
+        Assert.assertSame(entryCar, leaveCar);
+    }
 }
