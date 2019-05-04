@@ -3,25 +3,25 @@ Tasks：
 
 T1:
     Given: 有车位的停车场, 有车牌的车
-    When 取票
+    When 停车
     Then 停车成功， 出票
 
 T2:
     Given: 有车位的停车场, 无车牌的车
-    When 取票
+    When 停车
     Then 不发票
 
 T3:
     Given: 无车位的停车场
-    When 取票
+    When 停车
     Then 不发票
 
         Given: 无车位的停车场，有车牌的车
-        When 取票
+        When 停车
         Then 没有空位，不发票
 
         Given: 无车位的停车场, 无车牌的车
-        When 取票
+        When 停车
         Then 不发票
 
 取车：
