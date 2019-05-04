@@ -1,5 +1,8 @@
+import exception.EmptyCarNumberException;
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParkingLotTest {
 
@@ -12,5 +15,15 @@ public class ParkingLotTest {
 
         Assert.assertNotNull(ticket);
         Assert.assertEquals(car.getNumber(), ticket.getNumber());
+    }
+
+    @Test
+    public void should_return_car_number_exception_when_parking_given_an_available_parking_lot_and_car_without_number(){
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car("");
+
+        assertThrows(EmptyCarNumberException.class, ()->{
+            parkingLot.park(car);
+        });
     }
 }
