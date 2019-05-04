@@ -1,5 +1,6 @@
 import exception.EmptyCarNumberException;
 import exception.ParkingLotsFullException;
+import exception.TicketInvalidException;
 import exception.TicketNullException;
 
 import java.util.HashMap;
@@ -26,11 +27,16 @@ public class ParkingLot {
         return ticket;
     }
 
+    public Car pick(Ticket ticket) {
+        if(ticket == null) { throw new TicketNullException(); }
+        if(!hasTicket(ticket)){ throw new TicketInvalidException(); }
+        return lots.get(ticket);
+    }
+
     public boolean isAvailable() {
         return lots.size() < capacity;
     }
 
-    public void pick(Ticket ticket) {
-        if(ticket == null) { throw new TicketNullException(); }
-    }
+    public boolean hasTicket(Ticket ticket){return lots.get(ticket) != null;}
+
 }
