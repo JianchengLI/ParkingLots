@@ -1,0 +1,35 @@
+Tasks
+0. 查找第一个车库中车位未满的 ParkingLot
+
+
+1. 小弟停车
+所有 Given： Parking Lots（有无空位），车（有无牌）
+
+T1
+    Given 车无牌
+    When 小弟停车
+    Then 小弟拒绝停车，他说车无牌
+T2
+    Given 没有可用的 Parking Lots
+    When 小弟停车
+    Then 小弟拒绝停车，他说车场全满
+T3
+    Given 有可用的 Parking Lots ( 按顺序查找找到的第一个有空位的 ParkKing Lot ), 车有牌
+    When 小弟停车
+    Then 停车成功, 停入第一个车库中车位未满的 ParkingLot 并取票
+
+2. 小弟取车
+所有 Given：票（为空，有效，无效）, Parking Lots
+
+T4
+    Given: 无票
+    When 小弟取车
+    Then 小弟拒绝取车
+T5
+    Given: 无效的票
+    When 小弟取车
+    Then 小弟拒绝取车
+T6
+    Given: 有效的票
+    When： 小弟取车
+    Then：小弟取车成功
