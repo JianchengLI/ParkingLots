@@ -24,5 +24,10 @@ public class GraduateParkingBoy {
         }
         return null;
     }
+
+
+    public void pick(Ticket ticket, List<ParkingLot> parkingLots) {
+        if(ticket == null){ throw new TicketNullException(); }
+    }
 }
 

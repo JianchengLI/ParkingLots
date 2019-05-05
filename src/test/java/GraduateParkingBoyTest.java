@@ -1,5 +1,6 @@
 import exception.EmptyCarNumberException;
 import exception.ParkingLotsFullException;
+import exception.TicketNullException;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -55,4 +56,20 @@ public class GraduateParkingBoyTest {
         Assert.assertNotNull(ticket);
         Assert.assertEquals(carNumber, ticket.getNumber());
     }
+
+    @Test
+    public void should_throw_ticket_null_exception_when_pick_given_nothing(){
+        GraduateParkingBoy parkingBoy = new GraduateParkingBoy();
+        ParkingLot parkingLotA = new ParkingLot(1);
+        ParkingLot parkingLotB = new ParkingLot(1);
+
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLotA);
+        parkingLots.add(parkingLotB);
+
+        assertThrows(TicketNullException.class, ()->{
+            parkingBoy.pick(null, parkingLots);
+        });
+    }
+
 }
