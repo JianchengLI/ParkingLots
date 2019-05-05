@@ -16,6 +16,21 @@ public class GraduateParkingBoy {
         return parkingLot.park(car);
     }
 
+    public void pick(Ticket ticket, List<ParkingLot> parkingLots) {
+        if(ticket == null){ throw new TicketNullException(); }
+        ParkingLot parkingLot = findTicketOwnerParkingLots(ticket, parkingLots);
+        if(parkingLot == null){ throw new TicketInvalidException(); }
+    }
+
+    private ParkingLot findTicketOwnerParkingLots(Ticket ticket, List<ParkingLot> parkingLots){
+        for (ParkingLot parkingLot : parkingLots){
+            if(parkingLot.hasTicket(ticket)){
+                return parkingLot;
+            }
+        }
+        return null;
+    }
+
     private ParkingLot findFirstAvailableParkingLot(List<ParkingLot> parkingLots) {
         for (ParkingLot parkingLot : parkingLots){
             if(parkingLot.isAvailable()){
@@ -23,11 +38,6 @@ public class GraduateParkingBoy {
             }
         }
         return null;
-    }
-
-
-    public void pick(Ticket ticket, List<ParkingLot> parkingLots) {
-        if(ticket == null){ throw new TicketNullException(); }
     }
 }
 

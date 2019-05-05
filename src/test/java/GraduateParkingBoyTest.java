@@ -1,5 +1,6 @@
 import exception.EmptyCarNumberException;
 import exception.ParkingLotsFullException;
+import exception.TicketInvalidException;
 import exception.TicketNullException;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -72,4 +73,18 @@ public class GraduateParkingBoyTest {
         });
     }
 
+    @Test
+    public void should_throw_ticket_invalid_exception_when_pick_given_invalid_ticket_and_parking_lots(){
+        GraduateParkingBoy parkingBoy = new GraduateParkingBoy();
+        ParkingLot parkingLotA = new ParkingLot(1);
+        ParkingLot parkingLotB = new ParkingLot(1);
+
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLotA);
+        parkingLots.add(parkingLotB);
+
+        assertThrows(TicketInvalidException.class, ()->{
+            parkingBoy.pick(new Ticket("Invalid"), parkingLots);
+        });
+    }
 }
