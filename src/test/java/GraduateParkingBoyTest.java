@@ -87,4 +87,21 @@ public class GraduateParkingBoyTest {
             parkingBoy.pick(new Ticket("Invalid"), parkingLots);
         });
     }
+
+    @Test
+    public void should_return_car_when_pick_given_valid_ticket_and_parkinglots(){
+        Car entryCar = new Car("CN123456");
+
+        GraduateParkingBoy parkingBoy = new GraduateParkingBoy();
+        ParkingLot parkingLotA = new ParkingLot(1);
+        ParkingLot parkingLotB = new ParkingLot(1);
+
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLotA);
+        parkingLots.add(parkingLotB);
+
+        Ticket ticket = parkingBoy.park(entryCar, parkingLots);
+        Car pickedCar = parkingBoy.pick(ticket, parkingLots);
+        Assert.assertEquals(entryCar, pickedCar);
+    }
 }

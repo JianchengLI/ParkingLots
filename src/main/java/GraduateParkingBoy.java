@@ -16,10 +16,11 @@ public class GraduateParkingBoy {
         return parkingLot.park(car);
     }
 
-    public void pick(Ticket ticket, List<ParkingLot> parkingLots) {
+    public Car pick(Ticket ticket, List<ParkingLot> parkingLots) {
         if(ticket == null){ throw new TicketNullException(); }
         ParkingLot parkingLot = findTicketOwnerParkingLots(ticket, parkingLots);
         if(parkingLot == null){ throw new TicketInvalidException(); }
+        return parkingLot.pick(ticket);
     }
 
     private ParkingLot findTicketOwnerParkingLots(Ticket ticket, List<ParkingLot> parkingLots){
