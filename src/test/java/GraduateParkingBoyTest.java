@@ -1,4 +1,5 @@
 import exception.EmptyCarNumberException;
+import exception.ParkingLotsFullException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -20,6 +21,21 @@ public class GraduateParkingBoyTest {
 
         assertThrows( EmptyCarNumberException.class, ()-> {
             boy.park(new Car(""), parkingLots);
+        });
+    }
+
+    @Test
+    public void should_throw_park_lots_full_exception_when_park_given_some_parkinglots_all_full(){
+        GraduateParkingBoy parkingBoy = new GraduateParkingBoy();
+        ParkingLot parkingLotA = new ParkingLot(0);
+        ParkingLot parkingLotB = new ParkingLot(0);
+
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLotA);
+        parkingLots.add(parkingLotB);
+
+        assertThrows(ParkingLotsFullException.class, () -> {
+            parkingBoy.park(new Car("CN123456"), parkingLots);
         });
     }
 }
