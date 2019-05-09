@@ -24,6 +24,12 @@ T3:
         When 停车
         Then 不发票
 
+Review +
+T4:
+    Given: 重复的车牌
+    When： 停车
+    Then： 不发票
+
 取车：
 Given： 票（有效无效)
 
@@ -41,3 +47,5 @@ T6:
     Given: 有效的票
     When： 取车
     Then：出车成功
+
+

@@ -18,6 +18,12 @@ T3
     When 小弟停车
     Then 停车成功, 停入第一个车库中车位未满的 ParkingLot 并取票
 
+Review +
+T4:
+    Given: 重复的车牌
+    When： 小弟停车
+    Then： 小弟拒绝停车， 他说车套牌
+
 2. 小弟取车
 所有 Given：票（为空，有效，无效）, Parking Lots
 

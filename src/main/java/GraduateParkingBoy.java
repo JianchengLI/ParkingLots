@@ -1,7 +1,4 @@
-import exception.EmptyCarNumberException;
-import exception.ParkingLotsFullException;
-import exception.TicketInvalidException;
-import exception.TicketNullException;
+import exception.*;
 
 import java.util.List;
 
@@ -9,7 +6,8 @@ import java.util.List;
 public class GraduateParkingBoy {
 
     public Ticket park(Car car, List<ParkingLot> parkingLots) {
-        if (car.getNumber().equals("")){ throw new EmptyCarNumberException(); }
+        if(car.getNumber().equals("")){ throw new EmptyCarNumberException(); }
+        if(hasCarNumber(car, parkingLots)){ throw new DuplicateCarNumberException(); }
 
         ParkingLot parkingLot = findFirstAvailableParkingLot(parkingLots);
         if(parkingLot == null){ throw new ParkingLotsFullException(); }
@@ -39,6 +37,15 @@ public class GraduateParkingBoy {
             }
         }
         return null;
+    }
+
+    private boolean hasCarNumber(Car car, List<ParkingLot> parkingLots){
+        for (ParkingLot parkingLot : parkingLots){
+            if(parkingLot.hasCarNumber(car.getNumber())){
+                return true;
+            }
+        }
+        return false;
     }
 }
 

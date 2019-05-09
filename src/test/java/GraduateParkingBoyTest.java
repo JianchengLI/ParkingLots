@@ -1,7 +1,4 @@
-import exception.EmptyCarNumberException;
-import exception.ParkingLotsFullException;
-import exception.TicketInvalidException;
-import exception.TicketNullException;
+import exception.*;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -56,6 +53,26 @@ public class GraduateParkingBoyTest {
         Ticket ticket = parkingBoy.park(new Car(carNumber), parkingLots);
         Assert.assertNotNull(ticket);
         Assert.assertEquals(carNumber, ticket.getNumber());
+    }
+
+    @Test
+    public void should_throws_duplicate_car_number_exception_when_park_given_two_car_with_same_number(){
+        GraduateParkingBoy parkingBoy = new GraduateParkingBoy();
+        ParkingLot parkingLotA = new ParkingLot(1);
+        ParkingLot parkingLotB = new ParkingLot(1);
+
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLotA);
+        parkingLots.add(parkingLotB);
+
+        final String number = "CN123456";
+        Car car = new Car(number);
+        parkingBoy.park(car, parkingLots);
+
+        Car duplicateNumberCar = new Car(number);
+        assertThrows(DuplicateCarNumberException.class, ()->{
+            parkingBoy.park(duplicateNumberCar, parkingLots);
+        });
     }
 
     @Test

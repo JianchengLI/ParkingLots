@@ -1,7 +1,4 @@
-import exception.EmptyCarNumberException;
-import exception.ParkingLotsFullException;
-import exception.TicketInvalidException;
-import exception.TicketNullException;
+import exception.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -42,6 +39,20 @@ public class ParkingLotTest {
         Car car2 = new Car("");
         assertThrows(ParkingLotsFullException.class, ()->{
             parkingLot.park(car2);
+        });
+    }
+
+
+    @Test
+    public void should_throws_duplicate_car_number_exception_when_parking_given_two_car_with_same_number(){
+        final String number = "CN123456";
+        ParkingLot parkingLot = new ParkingLot(2);
+        Car entryCar = new Car(number);
+        parkingLot.park(entryCar);
+
+        Car duplicateNumberCar = new Car(number);
+        assertThrows(DuplicateCarNumberException.class,()->{
+            parkingLot.park(duplicateNumberCar);
         });
     }
 
