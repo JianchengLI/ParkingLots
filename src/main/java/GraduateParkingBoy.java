@@ -1,6 +1,7 @@
 import exception.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public class GraduateParkingBoy {
@@ -22,30 +23,30 @@ public class GraduateParkingBoy {
     }
 
     private ParkingLot findTicketOwnerParkingLots(Ticket ticket, List<ParkingLot> parkingLots){
-        for (ParkingLot parkingLot : parkingLots){
-            if(parkingLot.hasTicket(ticket)){
-                return parkingLot;
-            }
-        }
-        return null;
+        //Note: This will not iterate the whole collection, because streams are lazily evaluated
+        //      - it will stop at the first object that matches the condition)
+        Optional<ParkingLot> parkingLotFound = parkingLots
+                .stream()
+                .filter(parkingLot -> parkingLot.hasTicket(ticket))
+                .findFirst();
+        return parkingLotFound.isEmpty() ? null : parkingLotFound.get();
     }
 
     private ParkingLot findFirstAvailableParkingLot(List<ParkingLot> parkingLots) {
-        for (ParkingLot parkingLot : parkingLots){
-            if(parkingLot.isAvailable()){
-                return parkingLot;
-            }
-        }
-        return null;
+        Optional<ParkingLot> parkingLotFound = parkingLots
+                .stream()
+                .filter(ParkingLot::isAvailable)
+                .findFirst();
+
+        return parkingLotFound.isEmpty() ? null : parkingLotFound.get();
     }
 
     private boolean hasCarNumber(Car car, List<ParkingLot> parkingLots){
-        for (ParkingLot parkingLot : parkingLots){
-            if(parkingLot.hasCarNumber(car.getNumber())){
-                return true;
-            }
-        }
-        return false;
+        return parkingLots
+                .stream()
+                .anyMatch(parkingLot -> parkingLot.hasCarNumber(car.getNumber()));
+
+
     }
 }
 
