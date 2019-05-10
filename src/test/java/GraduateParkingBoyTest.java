@@ -40,7 +40,7 @@ public class GraduateParkingBoyTest {
     }
 
     @Test
-    public void should_return_ticket_when_park_given_some_parkinglots_within_more_than_one_available_and_a_car_with_number(){
+    public void should_return_ticket_and_park_in_the_first_available_parkingLot_when_park_given_some_parkinglots_within_more_than_one_available_and_a_car_with_number(){
         GraduateParkingBoy parkingBoy = new GraduateParkingBoy();
         ParkingLot parkingLotA = new ParkingLot(1);
         ParkingLot parkingLotB = new ParkingLot(1);
@@ -53,6 +53,9 @@ public class GraduateParkingBoyTest {
         Ticket ticket = parkingBoy.park(new Car(carNumber), parkingLots);
         Assert.assertNotNull(ticket);
         Assert.assertEquals(carNumber, ticket.getNumber());
+
+        Assert.assertTrue(parkingLotA.hasCarNumber(carNumber));
+        Assert.assertFalse(parkingLotB.hasCarNumber(carNumber));
     }
 
     @Test
