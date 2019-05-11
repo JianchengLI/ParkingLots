@@ -3,14 +3,10 @@ import exception.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ParkingLot {
+public class ParkingLot implements Comparable<ParkingLot> {
     private int capacity;
     private Map<Ticket, Car> lots = new HashMap<>();
     private Map<String, Car> dictionary = new HashMap<>();
-
-    public ParkingLot() {
-        this.capacity = 0;
-    }
 
     public ParkingLot(int capacity) {
         this.capacity = capacity;
@@ -33,11 +29,13 @@ public class ParkingLot {
         return lots.get(ticket);
     }
 
-    public boolean isAvailable() {
-        return lots.size() < capacity;
+    public boolean isAvailable() { return lots.size() < capacity; }
+    public boolean hasTicket(Ticket ticket) { return lots.get(ticket) != null; }
+    public boolean hasCarNumber(String number) { return dictionary.get(number) != null; }
+    public int getCapacityLeft() { return capacity - lots.size(); }
+
+    @Override
+    public int compareTo(ParkingLot other) {
+        return Integer.compare(this.getCapacityLeft(), other.getCapacityLeft());
     }
-
-    public boolean hasTicket(Ticket ticket){return lots.get(ticket) != null;}
-    public boolean hasCarNumber(String number){return dictionary.get(number) != null;}
-
 }
