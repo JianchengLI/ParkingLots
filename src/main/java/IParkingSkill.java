@@ -10,7 +10,7 @@ public interface IParkingSkill {
                 .stream()
                 .filter(parkingLot -> parkingLot.hasTicket(ticket))
                 .findFirst();
-        return parkingLotFound.isEmpty() ? null : parkingLotFound.get();
+        return parkingLotFound.orElse(null);
     }
 
     default boolean isCarNumberDuplicate(Car car, List<ParkingLot> parkingLots) {

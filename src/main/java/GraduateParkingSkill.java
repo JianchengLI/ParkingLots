@@ -14,6 +14,6 @@ public class GraduateParkingSkill implements IParkingSkill {
                 .filter(ParkingLot::isAvailable)
                 .findFirst();
 
-        return parkingLotFound.isEmpty() ? null : parkingLotFound.get();
+        return parkingLotFound.orElse(null);
     }
 }
