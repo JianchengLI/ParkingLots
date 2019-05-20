@@ -1,0 +1,11 @@
+空置率：剩余容量/总容量
+
+1. 小弟停车
+所有 Given： Parking Lots（有无空位），车（有无牌）
+
+T1:
+    Given 有可用的 Parking Lots ( 查找空置率最高的 Parking Lot ), 车有牌
+    When 小弟停车
+    Then 停车成功, 停入空置率的 ParkingLot 并取票
+
+其余情况同 GraduateParkingSkill
